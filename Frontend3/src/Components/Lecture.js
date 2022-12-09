@@ -25,9 +25,7 @@ function Lecture() {
             </Card>
 
 
-            <button onClick={this.onOpenModal}>Play Video </button>
-            <Player open={this.state.open} toggleModal={this.onOpenModal} />
-            <button onClick={this.downloadVideo}>Download </button>
+            
         </>
     );
 }
