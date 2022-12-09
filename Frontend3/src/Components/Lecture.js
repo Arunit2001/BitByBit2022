@@ -1,16 +1,23 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import MixcloudPlayer from 'react-player/mixcloud';
 import LectureModule from '../Modules/LectureModule';
+import LectureVideo from './LectureVideo';
 
 function Lecture() {
     const [LectureData, setLectureData] = useState(new LectureModule)
+    const [modal, setToggleModal] = useState({
+        isOpen : false,
+        url:'closeup_of_cute_small_bird_6892300.mp4'
+    });
+    
     const showLectureVideo = () =>{
         console.log('lecture video');
+        setToggleModal({isOpen: !modal.isOpen});
     }
     return ( 
         <>
-            {console.log(LectureData.img)}
             Lecture 1
             <Card style={{ width: '18rem' }}>
             <Card.Img variant="top" src = {LectureData.img}/>
@@ -25,9 +32,6 @@ function Lecture() {
             </Card>
 
 
-            <button onClick={this.onOpenModal}>Play Video </button>
-            <Player open={this.state.open} toggleModal={this.onOpenModal} />
-            <button onClick={this.downloadVideo}>Download </button>
         </>
     );
 }
