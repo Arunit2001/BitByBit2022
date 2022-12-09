@@ -3,7 +3,6 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import MixcloudPlayer from 'react-player/mixcloud';
 import LectureModule from '../Modules/LectureModule';
-import LectureVideo from './LectureVideo';
 
 function Lecture() {
     const [LectureData, setLectureData] = useState(new LectureModule)
