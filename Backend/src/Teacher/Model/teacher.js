@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Schema   = mongoose.Schema;
 
 // Create a schema
-const otherSchema = new Schema({
+const teacherSchema = new Schema({
   method: {
     type: String,
     enum: ['local', 'google'],
@@ -26,11 +26,24 @@ const otherSchema = new Schema({
   first_name: String,
   last_name: String,
   teacher_img: String,
+  course: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Course"
+  }],
+  payment_history: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Payment"
+  }],
+  institute_name: String,
+  phone_number: String,
+  bank_account_no: String,
+  bank_IFSC: String,
+  UPI_id: String,
   createdAt: Date
 });
 
 // Create a model
-const Other = mongoose.model('other', otherSchema);
+const Teacher = mongoose.model('teacher', teacherSchema);
 
 // Export the model
-module.exports = Other;
+module.exports = Teacher;
