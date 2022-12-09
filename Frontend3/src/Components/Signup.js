@@ -12,6 +12,9 @@ function Signup(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(email);
+        console.log(first_name);
+        console.log(last_name);
+        console.log(pass);
     }
     return (
             <div className="auth-form-container">

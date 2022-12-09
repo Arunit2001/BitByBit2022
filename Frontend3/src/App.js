@@ -6,6 +6,8 @@ import NavBar from './Components/NavBar';
 import Login from './Components/Login';
 import Signup from './Components/Signup';
 import Popup from "./Components/Popup";
+import CourseDetails  from "./Components/CourseDetails";
+import './Style/CourseDetails.css'
 import './Style/Login.css'
 import './Style/Signup.css';
 import './Style/Popup.css'
@@ -24,7 +26,7 @@ function App() {
     //   } 
     //  </div>
     <>
-      <Popup />
+      <CourseDetails />
     </>
   );
 }

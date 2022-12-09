@@ -14,8 +14,7 @@
 .register-form {
     display: flex;
     flex-direction: column;
-    background-color: #ebcc7a;
-    
+    background-color: #ebcc7a; 
 }
 
 @media screen and (min-width: 600px) {
@@ -24,6 +23,7 @@
         /* border: 1px solid white; */
         border-radius: 10px;
         margin: 0.5rem;
+        opacity: 0.9;
     }
 }
 
@@ -54,5 +54,4 @@ button {
     background: none;
     color: white;
     text-decoration: underline;
-    
 }
