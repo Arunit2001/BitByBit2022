@@ -30,6 +30,7 @@ module.exports = {
           last_name: result[0].last_name,
           teacher_img: result[0].teacher_img,
           id: result[0].id,
+          role: "teacher"
         });
         return response;
       } else if (result.length > 1) {

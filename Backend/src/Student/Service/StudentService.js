@@ -2,6 +2,9 @@ const Student = require("../Model/student");
 const jwt = require("jsonwebtoken");
 const Response = require("../../../util/response");
 const Course = require("../../Course/Model/course");
+const Module = require("../../Modules/Model/module");
+const Doubt = require("../../Doubt/Model/doubt");
+const Lecture = require("../../Lecture/Model/lecture");
 
 module.exports = {
   createStudentLocal: async function (email, password, first_name, last_name) {
@@ -45,6 +48,7 @@ module.exports = {
             ? studentdata.student_img
             : "https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png",
           id: studentdata.id,
+          role: "student"
         }
       );
       return response;
@@ -83,6 +87,7 @@ module.exports = {
             ? studentdata.student_img
             : "https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png",
           id: studentdata.id,
+          role: "student"
         }
       );
       res.send(response);
@@ -100,7 +105,7 @@ module.exports = {
   },
   getStudentCourses: async function (req, res) {
     try {
-      const studentCourses = await Teacher.findById(
+      const studentCourses = await Student.findById(
         req.authData.user._id
       ).populate({
         path: "course",
@@ -138,7 +143,7 @@ module.exports = {
         populate: {
           path: "lectures",
           model: "Lecture",
-          select: ["thumb", "name", "description", "videoContent"],
+          select: ["thumb", "name", "description"],
         },
       });
       const response = new Response(
@@ -293,4 +298,75 @@ module.exports = {
       res.send(response);
     }
   },
+  getLectures: async function (req, res) {
+    try {
+      const moduleId = req.body.moduleId;
+      const moduleLectures = await Module.findById(moduleId).populate({
+        path: "lectures",
+        model: "Lecture",
+        select: ["thumb", "name", "description", 'videoContent','doubts'],
+        populate: {
+          path: 'doubts',
+          model: 'Doubt',
+          populate: {
+            path: 'reply',
+            model: 'Doubt'
+          }
+        }
+      });
+      const response = new Response(
+        true,
+        "Module Lecture fetched successfully",
+        200,
+        req.token,
+        {
+          lectures: moduleLectures.lectures,
+        }
+      );
+      return res.send(response);
+    } catch (err) {
+      console.log(err);
+      const response = new Response(
+        false,
+        "Something went wrong",
+        503,
+        req.token,
+        {}
+      );
+      res.send(response);
+    }
+  },
+  askDoubts: async (req, res)=>{
+    try{
+      const lectureId = req.body.lectureId;
+      const doubtBody = {
+        question: req.body.question,
+        creator: req.authData.user._id
+      }
+      Doubt.create(doubtBody).then((result)=>{
+        Lecture.findOneAndUpdate({_id: lectureId}, {$push: {doubt: result._id}}).then((lectureResult)=>{
+          const response = new Response(true, "Doubt has been submitted and linked to the lecture.", 200, req.token, {result});
+          res.send(response);
+        }).catch((err)=>{
+          console.log(err);
+          const response = new Response(true, "Doubt has been submitted but not linked to the lecture.", 200, req.token, {result});
+          res.send(response);
+        })
+      }).catch((err)=>{
+        console.log(err);
+        const response = new Response(false, "Doubt has not been submitted.", 400, req.token, {});
+        res.send(response);
+      })
+    } catch(err){
+      console.log(err);
+      const response = new Response(
+        false,
+        "Something went wrong",
+        503,
+        req.token,
+        {}
+      );
+      res.send(response);
+    }
+  }
 };

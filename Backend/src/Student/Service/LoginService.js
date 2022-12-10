@@ -31,6 +31,7 @@ module.exports = {
             ? result[0].student_img
             : "https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png",
           id: result[0].id,
+          role: "student"
         });
         return response;
       } else if (result.length > 1) {

@@ -47,6 +47,7 @@ module.exports = {
             ? teacherdata.other_img
             : "https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png",
           id: teacherdata.id,
+          role: "teacher",
         }
       );
       return response;
@@ -79,6 +80,7 @@ module.exports = {
             ? teacherdata.teacher_img
             : "https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png",
           id: teacherdata.id,
+          role: "teacher",
         }
       );
       res.send(response);
@@ -237,16 +239,15 @@ module.exports = {
   getModules: async function (req, res) {
     try {
       const courseId = req.body.courseId;
-      const courseModules = await Course.findById(courseId)
-        .populate({
-          path: "modules",
-          model: "Module",
-          populate:{
-            path: "lectures",
-            model: "Lecture",
-            select: ["thumb", "name", "description", "videoContent"]
-          }
-        });
+      const courseModules = await Course.findById(courseId).populate({
+        path: "modules",
+        model: "Module",
+        populate: {
+          path: "lectures",
+          model: "Lecture",
+          select: ["thumb", "name", "description", "videoContent"],
+        },
+      });
       const response = new Response(
         true,
         "Course Modules fetched successfully",
@@ -329,4 +330,76 @@ module.exports = {
       res.send(response);
     }
   },
+  updateLecture: async (req, res) => {
+    try {
+      const description = req.body.description;
+      Lecture.findOneAndUpdate(
+        { _id: req.body.lectureId },
+        { $set: { description: description } }
+      )
+        .then((result) => {
+          const response = new Response(
+            true,
+            "Lecture updated",
+            200,
+            req.token,
+            {}
+          );
+          res.send(response);
+        })
+        .catch((err) => {
+          console.log(err);
+          const response = new Response(
+            false,
+            "Lecture not updated",
+            400,
+            req.token,
+            {}
+          );
+          res.send(response);
+        });
+    } catch (err) {
+      console.log(err);
+      const response = new Response(
+        false,
+        "Something went wrong",
+        503,
+        req.token,
+        {}
+      );
+      res.send(response);
+    }
+  },
+  getCourseStats: async (req, res)=>{
+    try{
+      const courseId = req.body.courseId;
+      const courseData = await Course.findById(courseId).populate({
+        path: "modules",
+        model: "Module",
+        select:['lectures']
+      });
+      let totalLectures = 0;
+      courseData.modules.forEach((ele)=>{
+        totalLectures += ele.lectures.length;
+      })
+      const total_income = 4500;
+      const response = new Response(true, "Stats", 200, req.token, {
+        enrolled_student: courseData.students.length,
+        modules: courseData.modules.length,
+        lectures: totalLectures,
+        total_income: total_income
+      })
+      res.send(response);
+    }catch (err) {
+      console.log(err);
+      const response = new Response(
+        false,
+        "Something went wrong",
+        503,
+        req.token,
+        {}
+      );
+      res.send(response);
+    }
+  }
 };
