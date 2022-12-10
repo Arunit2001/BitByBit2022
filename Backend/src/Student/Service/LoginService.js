@@ -1,10 +1,10 @@
-const User = require("../Model/user");
+const Student = require("../Model/student");
 const jwt = require("jsonwebtoken");
 const Response = require("../../../util/response");
 module.exports = {
   loginService: async function (email, password) {
     try {
-      const result = await User.find({ email: email });
+      const result = await Student.find({ email: email });
       if (result.length == 1) {
         if (
           result[0].method == "local" &&
@@ -22,13 +22,13 @@ module.exports = {
         let jwtSecretKey = process.env.SECRET_KEY;
         let data = {
           user: result[0],
-          role: "user",
+          role: "student",
         };
         const token = jwt.sign(data, jwtSecretKey);
         const response = new Response(true, "Login Successfull", 200, token, {
           first_name: result[0].first_name,
-          user_img: result[0].user_img
-            ? result[0].user_img
+          student_img: result[0].student_img
+            ? result[0].student_img
             : "https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png",
           id: result[0].id,
         });
