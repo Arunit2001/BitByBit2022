@@ -9,7 +9,7 @@ const lectureSchema = new Schema({
     ref: "Doubt"
   }],
   thumb: String,
-  video: String,
+  videoContent: String,
   name: String,
   description: String,
   creator: {
@@ -20,7 +20,7 @@ const lectureSchema = new Schema({
 });
 
 // Create a model
-const Lecture = mongoose.model('lecture', lectureSchema);
+const Lecture = mongoose.model('Lecture', lectureSchema);
 
 // Export the model
 module.exports = Lecture;

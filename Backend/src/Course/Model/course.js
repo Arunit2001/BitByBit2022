@@ -4,10 +4,10 @@ const Schema   = mongoose.Schema;
 
 // Create a schema
 const courseSchema = new Schema({
-  creator: [{
+  creator: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Teacher"
-  }],
+  },
   students: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: "Student"
@@ -22,11 +22,14 @@ const courseSchema = new Schema({
   price: String,
   name: String,
   description: String,
+  tags: [{
+    type: String
+  }],
   createdAt: Date
 });
 
 // Create a model
-const Course = mongoose.model('course', courseSchema);
+const Course = mongoose.model('Course', courseSchema);
 
 // Export the model
 module.exports = Course;
