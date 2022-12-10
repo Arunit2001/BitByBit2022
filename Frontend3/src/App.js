@@ -17,7 +17,7 @@ import Accounts from "./Components/Accounts";
 function App() {
   return (
     <>
-      <Accounts/>
+      <CourseDetails/>
     </>
   );
 }

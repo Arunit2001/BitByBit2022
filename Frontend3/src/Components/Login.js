@@ -1,5 +1,9 @@
-import React , {useState} from "react";
-
+import React, { useState } from "react";
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import '../Style/CourseDetails.css'
+import { Button, Fab } from "@mui/material";
+import FormEntry from "./FormEntry";
 
 function Login(props){
     const [email, setEmail] = useState('');
@@ -10,17 +14,17 @@ function Login(props){
         console.log(email);
     }
     return(
-        <div className="auth-form-container">
-        <h2>Login</h2>
-         <form className="login-form" onSubmit={handleSubmit}>
-            <label htmlFor = "email">email</label>
-            <input value={email} onChange={(e)=> setEmail(e.target.value)} type="email" placeholder="example@gmail.com" id="email" name="email" />
-            <label htmlFor = "password">password</label>
-            <input value={pass} onChange={(e)=> setPass(e.target.value)} type="password" placeholder="********" id="password" name="password" />
-            <button type="submit">Log In</button>
-         </form>
-         <button className="link-btn" onClick={() => props.onFormSwitch('register')}>Don't have an account? Register here.</button>
+    <div className="back">
+        <div className="mt-5 container" style={{position : "relative", top : "100px"}}>
+            <form className="form" onSubmit={handleSubmit}>
+                <h1 style={{padding : "10px 0 10px 0"}}>Login</h1>
+                <FormEntry label="Email" type="email" placeholder="example@gmail.com" val="email" setData={setEmail}/>
+                <FormEntry label="Password" type="password" placeholder="********" val="pass" setData={setPass}/>
+                <Button style={{fontSize : "20px", padding : "20px 0 10px 0", outline : "none", fontWeight : "bold", color : "orange"}} type="submit">Log In</Button>
+            </form>
+            <Button style={{outline : "none", textDecoration : "underline", color : "#000"}} onClick={() => props.onFormSwitch('register')}>Don't have an account? Register here.</Button>
         </div>
+    </div>
     )
 }
 

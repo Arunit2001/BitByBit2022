@@ -1,10 +1,16 @@
 import React, { useState } from "react";
-
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import '../Style/CourseDetails.css'
+import { Button, Fab } from "@mui/material";
+import FormEntry from "./FormEntry";
 
 function Signup(props) {
     const [first_name, setFirstName] = useState('');
     const [last_name, setLastName] = useState('');
     const [email, setEmail] = useState('');
+    const [mobile, setMobile] = useState('');
+    const [institute, setInstitute] = useState('');
     const [pass, setPass] = useState('');
     // const [number, setNumber] = useState('');
     // const [institute, setInstitute] = useState('');
@@ -17,26 +23,21 @@ function Signup(props) {
         console.log(pass);
     }
     return (
-            <div className="auth-form-container">
-                <h2>SignUp</h2>
-                <form className="register-form" onSubmit={handleSubmit}>
-                    <label htmlFor="first_name">First Name</label>
-                    <input value={first_name} onChange={(e) => setFirstName(e.target.value)} type="first_name" placeholder="John" id="first_name" name="first_name" />
-                    <label htmlFor="last_name">Last Name</label>
-                    <input value={last_name} onChange={(e) => setLastName(e.target.value)} type="last_name" placeholder="Wick" id="last_name" name="last_name" />
-                    <label htmlFor="email">Email</label>
-                    <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="example@gmail.com" id="email" name="email" />
-                    {/* <label htmlFor="number">Number</label>
-                    <input value={number} onChange={(e) => setNumber(e.target.value)} type="text" placeholder="1234567890" id="number" name="number" /> */}
-                    {/* <label htmlFor="institute">Institute</label>
-                    <input value={institute} onChange={(e) => setInstitute(e.target.value)} type="institute" placeholder="IIT Bombay" id="institute" name="institute" /> */}
-                    <label htmlFor="password">Password</label>
-                    <input value={pass} onChange={(e) => setPass(e.target.value)} type="password" placeholder="********" id="password" name="password" />
-                    <button type="submit">Sign up</button>
+        <div className="back">
+            <div className="mt-5 container">
+                <form className="form" onSubmit={handleSubmit}>
+                    <h1 style={{padding : "10px 0 10px 0"}}>Sign Up</h1>
+                    <FormEntry label="First name" placeholder="John" type="text" val="first_name" setData={setFirstName}/>
+                    <FormEntry label="Last name" placeholder="Wick" type="text" val="last_name" setData={setLastName}/>
+                    <FormEntry label="Email" placeholder="example@gmail.com" type="text" val="email" setData={setEmail}/>
+                    <FormEntry label="Phone no." placeholder="9837472662" type="text" val="mobile" setData={setMobile}/>
+                    <FormEntry label="Institute" placeholder="Indian Institute of Information Technology, Bhagalpur" type="text" val="institute" setData={setInstitute}/>
+                    <FormEntry label="Password" placeholder="***********" type="password" val="pass" setData={setPass}/>
+                    <Button style={{fontSize : "20px", padding : "20px 0 10px 0", outline : "none", fontWeight : "bold", color : "orange"}} type="submit">Sign Up</Button>
                 </form>
-                <button className="link-btn" onClick={() => props.onFormSwitch('login')}>Already have an account? Login here.</button>
+                <Button className="link-btn" style={{outline : "none"}} onClick={() => props.onFormSwitch('login')}>Already have an account? Login here.</Button>
             </div>
-            )
+        </div>
+        );
 }
-
-            export default Signup;
+export default Signup;

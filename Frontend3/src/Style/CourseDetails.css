@@ -4,6 +4,17 @@ body{
     /* background-image: url('https://static.vecteezy.com/system/resources/previews/002/272/094/original/happy-women-student-gratuated-from-education-background-concept-free-vector.jpg'); */
     
 }
+
+.back{
+    position: absolute;
+    width: 100vw;
+    height : 100vh;
+    background-image: url('https://static.vecteezy.com/system/resources/previews/002/272/094/original/happy-women-student-gratuated-from-education-background-concept-free-vector.jpg');
+}
+
+.thumb{
+    color : #000;
+}
 .container,
 .form{
     display: flex;
@@ -21,6 +32,10 @@ body{
         border : none;
         /* margin: 0.5rem; */
         width: 500px;
+        box-shadow:  0 0 10px #16558f66;
+    }
+    .container:hover{
+        box-shadow:  0 0 20px #16558f66;
     }
 }
 
