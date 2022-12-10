@@ -11,15 +11,17 @@ const Courses = (props) => {
         <>  
             <div className='frost-effect'>
 
-
+                <h1>Course Name</h1>
                 {moduleList.map((module, index) =>{
                     return(
+                        <>
                         <div className='module-container' key= {index}>
 
                             <h3>Module Name</h3>
                         
                             <Module index = {index} role={props.role}/>
                         </div>
+                        </>
                     );
                 })}
             </div>
