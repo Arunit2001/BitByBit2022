@@ -18,11 +18,11 @@ function LecturePage(){
     });
 
     return (
-        <div style={{height : '92vh'}}>
+        <div style={{height : '100%', width : "100%"}}>
             <div style={{float : "left", height : "100%", width : "70%"}}>
                 <div style={{height : "100%", width : "100%", overflow : "scroll", padding: "0 10px 0 10px"}} className="no-scrollbar-y">
-                    <VideoPlayer width="100%" height="55%" url={lecture.videoUrl}/>
-                    <VideoDetails width="100%" height="100px" title={lecture.title} desc={lecture.desc}/>
+                    <VideoPlayer width="100%" height="70%" url={lecture.videoUrl}/>
+                    <VideoDetails width="100%" height="90px" title={lecture.title} desc={lecture.desc}/>
                     <LectureDoubts width="100%" height="100%"/>
                 </div>
             </div>

@@ -15,7 +15,7 @@ function Login(props){
     }
     return(
     <div className="back">
-        <div className="mt-5 container" style={{position : "relative", top : "100px"}}>
+        <div className="mt-5 container" style={{position : "relative", top : "50px"}}>
             <form className="form" onSubmit={handleSubmit}>
                 <h1 style={{padding : "10px 0 10px 0"}}>Login</h1>
                 <FormEntry label="Email" type="email" placeholder="example@gmail.com" val="email" setData={setEmail}/>
