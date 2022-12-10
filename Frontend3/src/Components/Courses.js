@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import Module from './Module'
 
-function Courses(props) {
+const Courses = (props) => {
     const [moduleList, setModuleList] = useState([1,2,3,4,5]);
     const addNewModule = () => {
         console.log('Add new Module');

@@ -11,11 +11,9 @@ import NavBar from './Components/NavBar';
 import Profile from './Components/Profile';
 import Student from './Components/Student';
 import Tutor from './Components/Tutor';
-function App() {
-  const [loginMetaData, setLoginMetaData] = useState({
-    login:true,
-    role:'tutor'
-  });
+import LoginMetaData from './Modules/loginMetaData';
+const App = () => {
+  const [loginMetaData, setLoginMetaData] = useState(new LoginMetaData);
   return (
     <>
       {/* <NavBar /> */}
@@ -50,7 +48,7 @@ function App() {
           :
           <Error/>
         } */}
-      {loginMetaData.login == true ?
+      {loginMetaData.role != '' ?
         <Routes>
           
           {
