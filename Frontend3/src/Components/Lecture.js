@@ -31,7 +31,7 @@ function Lecture(props) {
             <div className="lecture-div">
                 
                 <Card >
-                {/* <img src= {playLogo} className='playlogo'/> */}
+                
                 <Card.Img className = 'lecture-img' variant="top" src = {lectureData.img} 
                    onClick = {()=>{
                        console.log('play video' ,props.index)
@@ -40,8 +40,7 @@ function Lecture(props) {
                      
                 >
                 </Card.Img>
-                {/* <Card.Img src = '../public/assests/icons8-play-button-circled-64.png' 
-                 /> */}
+                
         
 
                 
@@ -59,7 +58,6 @@ function Lecture(props) {
                     
                     <PlayArrowTwoToneIcon  />
                     </Fab>
-                    {/* <Button variant="primary" onClick={showLectureVideo}>Watch</Button> */}
                 </Card.Body>
 
                 </Card>
