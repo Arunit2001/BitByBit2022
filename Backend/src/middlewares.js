@@ -153,14 +153,19 @@ module.exports = {
     },
     verifyCourseEnrollment: async (req, res, next)=>{
         try{
+            let flag = false;
             const enrolledCourses = await Student.findById(req.authData.user._id);
             enrolledCourses.course.map((ele)=>{
+                if(flag==true) return;
                 if(ele==req.body.courseId){
-                    next();
+                    flag = true;
+                    return next();
                 }
             })
-            const response = new Response(false, "User don't have access of this course", 403, "", {});
-            res.send(response);
+            if(!flag){
+                const response = new Response(false, "User don't have access of this course", 403, "", {});
+                res.send(response);
+            }
         }catch(err){
             console.log(err);
             const response = new Response(false, "Something went wrong", 403, "", {});
@@ -172,6 +177,9 @@ module.exports = {
             const enrolledCourses = await Student.findById(req.authData.user._id);
             let flag = false;
             enrolledCourses.course.map((ele)=>{
+                if(flag==true){
+                    return;
+                }
                 if(ele==req.body.courseId){
                     flag = true;
                     const response = new Response(false, "User is already enrolled in this course", 403, "", {});

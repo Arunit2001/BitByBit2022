@@ -4,6 +4,7 @@ const {
   verifyCourseEnrollment,
   verifyAlreadyCourseEnrollment,
 } = require("../../middlewares");
+const { getLectures } = require("../Service/StudentService");
 const {
   createStudentLocal,
   updateStudentLocal,
@@ -30,12 +31,16 @@ router.post("/update/local", verifyTokenStudent, updateStudentLocal);
 
 router.get("/courses", verifyTokenStudent, getStudentCourses);
 
-router.post("/modules", verifyTokenStudent, verifyCourseEnrollment, getModules);
+router.post("/modules", verifyTokenStudent, getModules);
 
 router.post("/wishlist", verifyTokenStudent, addToWishlist);
 
 router.get("/wishlist", verifyTokenStudent, fetchWishlist);
 
 router.post("/enroll", verifyTokenStudent, verifyAlreadyCourseEnrollment, enrollCourse);
+
+router.post("/lectures", verifyTokenStudent, verifyCourseEnrollment, getLectures)
+
+router.post("/ask/doubts", verifyTokenStudent)
 
 module.exports = router;
