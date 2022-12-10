@@ -17,7 +17,9 @@ const doubtSchema = new Schema({
 });
 
 // Create a model
+
 const Doubt = mongoose.model('Doubt', doubtSchema);
+
 
 // Export the model
 module.exports = Doubt;
