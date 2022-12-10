@@ -4,6 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Button } from 'react-bootstrap';
+import PlayCircleOutlineTwoToneIcon from '@mui/icons-material/PlayCircleOutlineTwoTone';
 // import Grid from 'react-bootstrap/Grid';
 
 function Module(props) {
@@ -17,11 +18,12 @@ function Module(props) {
             {/* <Grid> */}
             
             <Row className='lecture-container'>
-
+                
                 {LectureList.map((ele, index) => {
                     return (
                         <Col className='lecture-card' key={index}>
-                        <Lecture lectureData = {ele} index={index} key = {index}/>
+                            <Lecture lectureData = {ele} index={index} key = {index}/>
+                            
                         </Col>
                     );
                     

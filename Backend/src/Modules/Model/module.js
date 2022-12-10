@@ -9,10 +9,13 @@ const moduleSchema = new Schema({
     ref: "Lecture"
   }],
   name: String,
+  
+
   createdAt: Date
 });
 
 // Create a model
+
 const Module = mongoose.model('Module', moduleSchema);
 
 // Export the model

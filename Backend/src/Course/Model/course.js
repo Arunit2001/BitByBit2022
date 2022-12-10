@@ -4,7 +4,8 @@ const Schema   = mongoose.Schema;
 
 // Create a schema
 const courseSchema = new Schema({
-  creator: {
+
+  
     type: mongoose.Schema.Types.ObjectId,
     ref: "Teacher"
   },
@@ -22,9 +23,11 @@ const courseSchema = new Schema({
   price: String,
   name: String,
   description: String,
+
   tags: [{
     type: String
   }],
+
   createdAt: Date
 });
 

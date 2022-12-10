@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import Module from './Module'
 
-function Courses(props) {
+const Courses = (props) => {
     const [moduleList, setModuleList] = useState([1,2,3,4,5]);
     const addNewModule = () => {
         console.log('Add new Module');
@@ -11,15 +11,17 @@ function Courses(props) {
         <>  
             <div className='frost-effect'>
 
-
+                <h1>Course Name</h1>
                 {moduleList.map((module, index) =>{
                     return(
+                        <>
                         <div className='module-container' key= {index}>
 
                             <h3>Module Name</h3>
                         
                             <Module index = {index} role={props.role}/>
                         </div>
+                        </>
                     );
                 })}
             </div>
