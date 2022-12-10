@@ -4,6 +4,7 @@ import TextField from '@mui/material/TextField';
 import '../Style/CourseDetails.css'
 import { Button, Fab } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
+import FormEntry from "./FormEntry";
 
 var file;
 
@@ -45,32 +46,8 @@ function CourseDetails() {
             <div className="mt-5 container">
                 <form className="form" onSubmit={handleSubmit}>
                     <h1 style={{padding : "10px 0 10px 0"}}>Course details</h1>
-                    <Box
-                        
-                        component="form"
-                        sx={{
-                            '& .MuiTextField-root': { m: 1, width: '98%', color : "#000"},
-                        }}
-                        noValidate
-                        autoComplete="off"
-                        style={{padding : "10px 0 10px 0", color : "#000"}}>
-                        <TextField id="course_name"  type="course_name" placeholder="" name="course_name" style={{backgroundColor : "#fff", outline : "none", borderRadius : "5px", color : "#000"}} onChange={(e) => setCourseName(e.target.value)} label="Course name" variant="outlined" />
-                    </Box>
-                    {/* <label htmlFor="course_name">Course Name</label>
-                    <input value={course_name} onChange={(e) => setCourseName(e.target.value)} type="course_name" placeholder="" id="course_name" name="course_name" /> */}
-                    <Box
-                        component="form"
-                        sx={{
-                            '& .MuiTextField-root': { m: 1, width: '98%'},
-                        }}
-                        noValidate
-                        autoComplete="off"
-                        style={{padding : "10px 0 10px 0"}}>
-                        <TextField onChange={(e) => setBasePrice(e.target.value)} type="base_price" placeholder="" id="base_price" name="base_price" style={{backgroundColor : "#fff", outline : "none", borderRadius : "5px"}} variant="outlined" label="Base price" />
-                    </Box>
-                    {/* <label htmlFor="base_price">Base Price</label>
-                    <input value={base_price} onChange={(e) => setBasePrice(e.target.value)} type="base_price" placeholder="" id="base_price" name="base_price" /> */}
-                    
+                    <FormEntry label="Course name" val="course_name" placeholder="" type="text" setData={setCourseName}/>
+                    <FormEntry label="Base price" val="base_price" placeholder="" type="text" setData={setBasePrice}/>
                     <Box
                         component="form"
                         sx={{
@@ -81,10 +58,6 @@ function CourseDetails() {
                         style={{padding : "10px 0 10px 0"}}>
                         <TextField value={description} onChange={(e) => setDescription(e.target.value)} type="description" multiline rows={4} placeholder="" id="description" name="description" style={{backgroundColor : "#fff", outline : "none", borderRadius : "5px", color : "#000"}} variant="outlined" label="Description" />
                     </Box>
-                    {/* <label htmlFor="description">Course Description</label>
-                    <input value={description} onChange={(e) => setDescription(e.target.value)} type="description" placeholder="" id="description" name="description" /> */}
-                    {/* <label htmlFor="thumbnail">Image</label>
-                    <input value={thumbnail} onChange={(e) => setThumbnail(e.target.value)} type="file" placeholder="" id="thumbnail" name="thumbnail" /> */}
                     <div style={{width : "100%", display : "table"}}>
                         <Box
                             component="form"
