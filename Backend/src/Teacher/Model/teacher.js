@@ -39,6 +39,7 @@ const teacherSchema = new Schema({
   bank_account_no: String,
   bank_IFSC: String,
   UPI_id: String,
+  total_income: String,
   createdAt: Date
 });
 

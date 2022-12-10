@@ -1,0 +1,38 @@
+.login-form {
+    display: flex;
+    flex-direction: column;
+    /* background-color: #ebcc7a; */
+    
+}
+
+label {
+    text-align: left;
+    padding: 0.25rem 0;
+    
+}
+
+input {
+    margin: 0.5rem 0;
+    padding: 1rem;
+    border: none;
+    border-radius: 10px;
+    
+}
+
+@media screen and (min-width: 600px) {
+    .auth-form-container {
+        padding: 2rem;
+        /* border: 1px solid white; */
+        border-radius: 10px;
+        margin: 0.5rem;
+    }
+}
+
+Button {
+    border: none;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #000000;
+}

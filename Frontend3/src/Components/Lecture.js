@@ -4,7 +4,6 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import MixcloudPlayer from 'react-player/mixcloud';
 import LectureModule from '../Modules/LectureModule';
-import LectureVideo from './LectureVideo';
 
 import Fab from '@mui/material/Fab';
 import playLogo from '../assests/icons8-play-button-circled-64.png';
@@ -70,6 +69,7 @@ function Lecture(props) {
             </div>
 
 
+            
         </>
     );
 }
