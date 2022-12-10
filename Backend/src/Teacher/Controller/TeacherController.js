@@ -1,6 +1,6 @@
 const express = require('express');
 const { verifyTokenTeacher, verifyCourseOwnership } = require('../../middlewares');
-const { createTeacherLocal, updateTeacherLocal, createCourse, getTeacherCourses, createModule, getModules, addLecture, updateLecture, getCourseStats } = require('../Service/TeacherService');
+const { createTeacherLocal, updateTeacherLocal, createCourse, getTeacherCourses, createModule, getModules, addLecture, updateLecture, getCourseStats, replyDoubt } = require('../Service/TeacherService');
 var router = express.Router();
 
 router.post('/create/local',async function(req,res,next){
@@ -24,5 +24,7 @@ router.post('/add/lecture', verifyTokenTeacher, verifyCourseOwnership, addLectur
 router.post('/update/lecture', verifyTokenTeacher, verifyCourseOwnership, updateLecture)
 
 router.post('/stats', verifyTokenTeacher, verifyCourseOwnership, getCourseStats)
+
+router.post('/reply/doubt', verifyTokenTeacher, verifyCourseOwnership, replyDoubt)
 
 module.exports = router;

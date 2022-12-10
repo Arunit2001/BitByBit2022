@@ -4,6 +4,7 @@ const Response = require("../../../util/response");
 const Course = require("../../Course/Model/course");
 const Module = require("../../Modules/Model/module");
 const Lecture = require("../../Lecture/Model/lecture");
+const Doubt = require("../../Doubt/Model/doubt");
 
 module.exports = {
   createTeacherLocal: async function (email, password, first_name, last_name) {
@@ -245,7 +246,15 @@ module.exports = {
         populate: {
           path: "lectures",
           model: "Lecture",
-          select: ["thumb", "name", "description", "videoContent"],
+          select: ["thumb", "name", "description", "videoContent", 'doubts'],
+          populate: {
+            path: 'doubts',
+            model: 'Doubt',
+            populate: {
+              path: 'reply',
+              model: 'Doubt'
+            }
+          }
         },
       });
       const response = new Response(
@@ -390,6 +399,39 @@ module.exports = {
         total_income: total_income
       })
       res.send(response);
+    }catch (err) {
+      console.log(err);
+      const response = new Response(
+        false,
+        "Something went wrong",
+        503,
+        req.token,
+        {}
+      );
+      res.send(response);
+    }
+  },
+  replyDoubt: async(req, res)=>{
+    try{
+      const doubtId = req.body.doubtId;
+      const doubtBody = {
+        question: req.body.question,
+        creator: req.authData.user._id
+      }
+      Doubt.create(doubtBody).then((result)=>{
+        Doubt.findOneAndUpdate({_id: doubtId}, {reply: result._id}).then((doubtResult)=>{
+          const response = new Response(true, "Answer has been submitted and linked to the question.", 200, req.token, {result});
+          res.send(response);
+        }).catch((err)=>{
+          console.log(err);
+          const response = new Response(true, "Answer has been submitted but not linked to the doubt.", 200, req.token, {result});
+          res.send(response);
+        })
+      }).catch((err)=>{
+        console.log(err);
+        const response = new Response(false, "Answer has not been submitted.", 400, req.token, {});
+        res.send(response);
+      })
     }catch (err) {
       console.log(err);
       const response = new Response(

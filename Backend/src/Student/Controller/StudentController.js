@@ -4,7 +4,7 @@ const {
   verifyCourseEnrollment,
   verifyAlreadyCourseEnrollment,
 } = require("../../middlewares");
-const { getLectures } = require("../Service/StudentService");
+const { getLectures, askDoubts } = require("../Service/StudentService");
 const {
   createStudentLocal,
   updateStudentLocal,
@@ -41,6 +41,6 @@ router.post("/enroll", verifyTokenStudent, verifyAlreadyCourseEnrollment, enroll
 
 router.post("/lectures", verifyTokenStudent, verifyCourseEnrollment, getLectures)
 
-router.post("/ask/doubts", verifyTokenStudent)
+router.post("/ask/doubt", verifyTokenStudent, verifyCourseEnrollment, askDoubts)
 
 module.exports = router;

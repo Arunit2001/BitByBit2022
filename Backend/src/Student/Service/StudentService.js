@@ -344,7 +344,7 @@ module.exports = {
         creator: req.authData.user._id
       }
       Doubt.create(doubtBody).then((result)=>{
-        Lecture.findOneAndUpdate({_id: lectureId}, {$push: {doubt: result._id}}).then((lectureResult)=>{
+        Lecture.findOneAndUpdate({_id: lectureId}, {$push: {doubts: result._id}}).then((lectureResult)=>{
           const response = new Response(true, "Doubt has been submitted and linked to the lecture.", 200, req.token, {result});
           res.send(response);
         }).catch((err)=>{
