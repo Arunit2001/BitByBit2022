@@ -11,12 +11,22 @@ import NavBar from './Components/NavBar';
 import Profile from './Components/Profile';
 import Student from './Components/Student';
 import Tutor from './Components/Tutor';
+import Accounts from './Components/Accounts';
 import LoginMetaData from './Modules/loginMetaData';
 const App = () => {
-  const [loginMetaData, setLoginMetaData] = useState(new LoginMetaData);
+  const [loginMetaData, setLoginMetaData] = useState({});
+  const updateLoginMetaData = async (response) =>{
+    console.log('updating loginMetaData', response);
+    
+    // const newLoginMetaData = new LoginMetaData(response);
+    setLoginMetaData(response);
+
+  }
+
   return (
     <>
-      {/* <NavBar /> */}
+      {/* {
+     console.log('LoginMetaData: ',loginMetaData)} */}
       {/* <Nav>
         <Link to='/home'>Home</Link>
         <Link to='/courses'>Coureses</Link>
@@ -48,32 +58,32 @@ const App = () => {
           :
           <Error/>
         } */}
-      {loginMetaData.role != '' ?
+      {loginMetaData.result != undefined ?
         <Routes>
           
+          {console.log(loginMetaData.result.role)}
           {
-            loginMetaData.role == 'student' ?
+            loginMetaData.result.role == 'student' ?
             <Route exact path='student' element={<Student/>} >
-
-              <Route  path='courses' element={<Courses role={loginMetaData.role}/>}></Route>
-              <Route path='wishlist' element={<Courses role={loginMetaData.role}/>}></Route>
-              <Route path='enrollcourses' element={<EnrollCourses role={loginMetaData.role}/>}></Route>
+              {console.log("hello")}
+              {console.log(loginMetaData)}
+              <Route  path='courses' element={<Courses loginMetaData = {loginMetaData} role={loginMetaData.result.role} />}></Route>
+              <Route path='wishlist' element={<Courses loginMetaData = {loginMetaData} role={loginMetaData.result.role}/>}></Route>
+              <Route path='enrollcourses' element={<EnrollCourses loginMetaData = {loginMetaData} role={loginMetaData.role}/>}></Route>
               <Route  path='profile' element={<Profile role={loginMetaData.role}/>}></Route>
               <Route path='*' element={<Error/>}/>
             </Route>
             :
             <Route exact path='tutor' element={<Tutor/>}>
-              <Route path='courses' element={<Courses role={loginMetaData.role}/>}></Route>
-              <Route path='profile' element={<Profile role={loginMetaData.role}/>}></Route>
+              <Route path='courses' element={<Courses loginMetaData = {loginMetaData} role={loginMetaData.result.role}/>}></Route>
+              <Route path='profile' element={<Profile loginMetaData = {loginMetaData} role={loginMetaData.result.role}/>}></Route>
               <Route path='*' element={<Error/>}/>
             </Route>
           }
           <Route path='*' element={<Error/>}/>
         </Routes>
-        :<Error/>
+        :<Accounts loginMetaData={loginMetaData} updateLoginMetaData={updateLoginMetaData}/>
       }
-      {/* <Courses /> */}
-      {/* <Create/> */}
     </>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Lecture from './Lecture';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -8,11 +8,23 @@ import PlayCircleOutlineTwoToneIcon from '@mui/icons-material/PlayCircleOutlineT
 // import Grid from 'react-bootstrap/Grid';
 
 function Module(props) {
-    const [LectureList, setLectureList] = useState([1,2,3,4]);
+    const [LectureList, setLectureList] = useState([]);
     const addNewLecture = () => {
         console.log('Add new Lecture');
     }
     
+    const getLectures= () => {
+        console.log('Fetching Lectures');
+    }
+    
+    useEffect(() => {
+        //increment this Hook
+        if(props.loginMetaData != undefined){
+           getLectures(props.loginMetaData);
+        }
+     }, []);
+
+
     return ( 
         <>  
             {/* <Grid> */}

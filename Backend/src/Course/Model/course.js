@@ -5,7 +5,7 @@ const Schema   = mongoose.Schema;
 // Create a schema
 const courseSchema = new Schema({
 
-  
+  creator:{
     type: mongoose.Schema.Types.ObjectId,
     ref: "Teacher"
   },

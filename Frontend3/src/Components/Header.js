@@ -6,7 +6,7 @@ import Courses from './Courses';
 function Header(props) {
     return (  
         <>
-            {console.log('Inside Tutor')}
+            {/* {console.log('Inside Tutor')} */}
             {/* <Nav>
                 <Link to='courses'>Courses</Link>
                 <Link to='profile'>Profile</Link>

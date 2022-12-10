@@ -1,38 +1,58 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
+import Error from './Error';
 import Module from './Module'
 
 const Courses = (props) => {
-    const [moduleList, setModuleList] = useState([1,2,3,4,5]);
+
+    const [courseList, setCourseList] = useState([]);
     const addNewModule = () => {
         console.log('Add new Module');
     }
-    return (  
-        <>  
-            <div className='frost-effect'>
+    
+    //function for getting courses related to role and id
+    const getCourses = async (loginMetaData) =>{
+        console.log("hi");
+        console.log(props);
+        console.log(loginMetaData);
+        const requestBody= {
+            method:'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': (loginMetaData.token == undefined ? '' : loginMetaData.token),
+            }
+        }
+        console.log('Role',props.role);
+        const result = await fetch('http://localhost:5000'+`/${props.role}/courses`, requestBody)
+        const response = await result.json();
+        console.log('Courses', response);
+        setCourseList(response.result.courses);
 
-                <h1>Course Name</h1>
-                {moduleList.map((module, index) =>{
+    }
+
+    useEffect(() => {
+         //increment this Hook
+         if(props.loginMetaData != undefined){
+            getCourses(props.loginMetaData);
+         }
+      }, []); 
+    // props.loginMetaData == undefined ? console.log('No loginMetaData'): getCourses(props.loginMetaData);
+    return (  
+        <>
+        {courseList.map((course, index) =>{
                     return(
                         <>
                         <div className='module-container' key= {index}>
 
-                            <h3>Module Name</h3>
-                        
-                            <Module index = {index} role={props.role}/>
+                            <h3>{course.name}</h3>
+
+                            <Module courseData={course} index = {index} role={props.role} key = {index}/>
                         </div>
                         </>
                     );
                 })}
-            </div>
-
-            <Button 
-                className="create-btn"
-                onClick={addNewModule}
-            >Add Module</Button>
-            
         </>
-    );
-}
-
+                );
+            }
+            
 export default Courses;
