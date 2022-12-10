@@ -18,6 +18,6 @@ router.get("/protected", verifyTokenAdmin, function(req, res, next){
   res.send("Protected Route");
 })
 
-router.post("/change/password", verifyTokenResetPassword);
+// router.post("/change/password", verifyTokenResetPassword);
 
 module.exports = router;

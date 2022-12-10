@@ -6,13 +6,12 @@ const cors = require('cors')
 //Importing Controllers
 const adminloginController = require('./src/Admin/Controller/LoginController')
 const adminController = require('./src/Admin/Controller/AdminController')
-const userloginController = require('./src/User/Controller/LoginController')
-const userController = require('./src/User/Controller/UserController')
-const otherloginController = require('./src/Other/Controller/LoginController')
-const otherController = require('./src/Other/Controller/OtherController')
+const studentloginController = require('./src/Student/Controller/LoginController')
+const studentController = require('./src/Student/Controller/StudentController')
+const teacherloginController = require('./src/Teacher/Controller/LoginController')
+const teacherController = require('./src/Teacher/Controller/TeacherController')
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-// const mongoConnect = require('./util/database').mongoConnect;
 
 process.on("uncaughtException", err => {
   console.log("Shutting Down Server" + err.stack)
@@ -27,10 +26,10 @@ app.use(cors())
 
 app.use('/login/admin', adminloginController)
 app.use('/admin', adminController)
-app.use('/login/other', otherloginController)
-app.use('/other', otherController)
-app.use('/login/user', userloginController)
-app.use('/user', userController)
+app.use('/login/teacher', teacherloginController)
+app.use('/teacher', teacherController)
+app.use('/login/student', studentloginController)
+app.use('/student', studentController)
 
 
 app.get('/', function (req, res) {

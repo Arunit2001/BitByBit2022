@@ -28,7 +28,7 @@ const teacherSchema = new Schema({
   teacher_img: String,
   course: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Course"
+    ref: "course"
   }],
   payment_history: [{
     type: mongoose.Schema.Types.ObjectId,
@@ -44,7 +44,7 @@ const teacherSchema = new Schema({
 });
 
 // Create a model
-const Teacher = mongoose.model('teacher', teacherSchema);
+const Teacher = mongoose.model('Teacher', teacherSchema);
 
 // Export the model
 module.exports = Teacher;

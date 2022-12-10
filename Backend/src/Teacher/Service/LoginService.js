@@ -1,10 +1,10 @@
-const Other = require("../Model/other");
+const Teacher = require("../Model/teacher");
 const jwt = require("jsonwebtoken");
 const Response = require("../../../util/response");
 module.exports = {
-    otherLoginService: async function (email, password) {
+    teacherLoginService: async function (email, password) {
     try {
-      const result = await Other.find({ email: email });
+      const result = await Teacher.find({ email: email });
       if (result.length == 1) {
         if (
           result[0].method == "local" &&
@@ -25,15 +25,16 @@ module.exports = {
           role: "admin",
         };
         const token = jwt.sign(data, jwtSecretKey);
-        const response = new Response(true, "Other Login Successfull", 200, token, {
+        const response = new Response(true, "Teacher Login Successfull", 200, token, {
           first_name: result[0].first_name,
           last_name: result[0].last_name,
-          admin_img: result[0].admin_img,
+          teacher_img: result[0].teacher_img,
           id: result[0].id,
+          role: "teacher"
         });
         return response;
       } else if (result.length > 1) {
-        const response = new Response(false, "Contact Admin", 500, "", {});
+        const response = new Response(false, "Multiple teachers detected with same email.", 500, "", {});
         return response;
       } else {
         const response = new Response(false, "Wrong Credentials", 503, "", {});
