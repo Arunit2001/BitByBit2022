@@ -159,3 +159,15 @@
   font-size: larger;
   z-index: 3;
 }
+
+.course-parent{
+  display: flex;
+  justify-content: start;
+  flex-wrap: wrap;
+}
+
+.card-ele{
+  margin: 2px;
+  max-width: 500px;
+  min-width: 500px
+}

@@ -13,14 +13,20 @@ import Student from './Components/Student';
 import Tutor from './Components/Tutor';
 import Accounts from './Components/Accounts';
 import LoginMetaData from './Modules/loginMetaData';
+import Module from './Components/Module';
 const App = () => {
   const [loginMetaData, setLoginMetaData] = useState({});
+  const [curCourse, setCurentCourse] = useState('');
   const updateLoginMetaData = async (response) =>{
     console.log('updating loginMetaData', response);
     
     // const newLoginMetaData = new LoginMetaData(response);
     setLoginMetaData(response);
 
+  }
+
+  const updateCourseId = (id)=>{
+    setCurentCourse(id);
   }
 
   return (
@@ -67,7 +73,9 @@ const App = () => {
             <Route exact path='student' element={<Student/>} >
               {console.log("hello")}
               {console.log(loginMetaData)}
-              <Route  path='courses' element={<Courses loginMetaData = {loginMetaData} role={loginMetaData.result.role} />}></Route>
+              <Route  path='courses' element={<Courses updateCourseId= {updateCourseId} loginMetaData = {loginMetaData} role={loginMetaData.result.role} />}>
+              </Route>
+                  <Route path='courses/modules' element={<Module curCourse={curCourse} loginMetaData = {loginMetaData} role={loginMetaData.result.role}/>} />
               <Route path='wishlist' element={<Courses loginMetaData = {loginMetaData} role={loginMetaData.result.role}/>}></Route>
               <Route path='enrollcourses' element={<EnrollCourses loginMetaData = {loginMetaData} role={loginMetaData.role}/>}></Route>
               <Route  path='profile' element={<Profile role={loginMetaData.role}/>}></Route>
